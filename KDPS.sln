@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35806.99 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "KDPS", "KDPS\KDPS.pyproj", "{8C5A43B8-EBAD-4614-936C-D3C1E033BDC0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8C5A43B8-EBAD-4614-936C-D3C1E033BDC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C5A43B8-EBAD-4614-936C-D3C1E033BDC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F4D9FC51-6F60-4614-A89F-9BCFF3D3DB41}
+	EndGlobalSection
+EndGlobal
