@@ -1,0 +1,38 @@
+## Build results
+[Bb]in/
+[Oo]bj/
+*.dll
+*.exe
+
+## Visual Studio files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Others
+*.log
+*.vspscc
+.vs/
+*.pdb
+*.cache
+*.dbmdl
+
+## NuGet packages
+*.nupkg
+*.snupkg
+packages/
+*.nuspec
+
+## Rider
+.idea/
+
+## Mac
+.DS_Store
+
+## Windows
+Thumbs.db
+ehthumbs.db
+
+## Others
+.env
