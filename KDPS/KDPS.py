@@ -1,10 +1,10 @@
-#lab02.py
+#lab04.py
 
 def cyclestep():
     roomText = "Sie befinden sich im Raum"
     directionText = "Ihr Blick ist gerichtet nach"
     actionText = "Ihr Befehl (L-Links, R-Rechts, G-Gehen, X-Ende): "
-    print(roomText, str(rooms[roomID]))
+    print(roomText, roomID)
     print(directionText, str(directions[directionID]))
     return input(actionText)
 
@@ -17,11 +17,14 @@ closureText = """---------------------------------
 """
 wrongInputText = "Falsche Eingabe. Versuche nochmal."
 
-roomID = 0
+roomID = 'Kuche'
 directionID = 0
-rooms = ["Kuche", "Wohnzimmer", "Bad"]
 directions = ["Norden", "Osten", "Suden", "Westen"]
-connections = [["Kuche", "Norden"], ["Wohnzimmer", "Suden"], ["Wohnzimmer", "Osten"], ["Bad", "Westen"]]
+connections = {
+    ('Kuche', 0) : 'Wohnzimmer',
+    ('Wohnzimmer', 2) : 'Kuche',
+    ('Wohnzimmer', 3) : 'Bad',
+    ('Bad', 1) : 'Wohnzimmer' }
 
 print(welcomeText)
 
@@ -38,16 +41,9 @@ while True:
         else:
             directionID += 1
     elif userInput == "G" or userInput == "g":
-        placement = [rooms[roomID], directions[directionID]]
+        placement = (roomID, directionID)
         if placement in connections:
-            if placement[0] == rooms[0]:
-                roomID = 1
-            elif placement[0] == rooms[1] and placement[1] == directions[2]:
-                roomID = 0
-            elif placement[0] == rooms[1] and placement[1] == directions[1]:
-                roomID = 2
-            elif placement[0] == rooms[2]:
-                roomID = 1
+            roomID = connections[placement]            
         else:
             print("Geht nicht")
     elif userInput == "X" or userInput == "x":
