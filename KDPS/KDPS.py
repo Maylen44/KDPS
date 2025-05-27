@@ -1,58 +1,61 @@
 #lab02.py
 
+def cyclestep():
+    roomText = "Sie befinden sich im Raum"
+    directionText = "Ihr Blick ist gerichtet nach"
+    actionText = "Ihr Befehl (L-Links, R-Rechts, G-Gehen, X-Ende): "
+    print(roomText, str(rooms[roomID]))
+    print(directionText, str(directions[directionID]))
+    return input(actionText)
+
 welcomeText = """---------------------------------
 ------------LABYRINTH------------
 ---------------------------------"""
-actionText = "Ihr Befehl (L-Links, R-Rechts, G-Gehen, X-Ende): "
+closureText = """---------------------------------
+-------------Bye Bye-------------
+---------------------------------
+"""
+wrongInputText = "Falsche Eingabe. Versuche nochmal."
+
 roomID = 0
 directionID = 0
-rooms = ["Kuche", "Wohnzimmer", "Schlafzimmer", "Koridor"]
+rooms = ["Kuche", "Wohnzimmer", "Bad"]
 directions = ["Norden", "Osten", "Suden", "Westen"]
+connections = [["Kuche", "Norden"], ["Wohnzimmer", "Suden"], ["Wohnzimmer", "Osten"], ["Bad", "Westen"]]
 
 print(welcomeText)
 
 while True:
-    print("Sie befinden sich in Raum: '%s'." % rooms[roomID])
-    print("Ihr Blick ist nach '%s' gerichtet." % directions[directionID])
-    playerInput = input(actionText)
-    
-    if playerInput == 'L' or playerInput == 'l':
+    userInput = cyclestep()
+    if userInput == "L" or userInput == "l":
         if directionID == 0:
-            directionID = 3
+            directionID = len(directions) - 1
         else:
             directionID -= 1
-    elif playerInput == 'R' or playerInput == 'r':
-        if directionID == 3:
+    elif userInput == "R" or userInput == "r":
+        if directionID == len(directions) - 1:
             directionID = 0
         else:
             directionID += 1
-    elif playerInput == 'G' or playerInput == 'g':
-        match (roomID, directionID):
-            case (0, 0):
-                roomID = 3
-            case (3, 2):
-                roomID = 0
-            case (3, 1):
+    elif userInput == "G" or userInput == "g":
+        placement = [rooms[roomID], directions[directionID]]
+        if placement in connections:
+            if placement[0] == rooms[0]:
                 roomID = 1
-            case (1, 3):
-                roomID = 3
-            case (3, 3):
+            elif placement[0] == rooms[1] and placement[1] == directions[2]:
+                roomID = 0
+            elif placement[0] == rooms[1] and placement[1] == directions[1]:
                 roomID = 2
-            case (2, 1):
-                roomID = 3
-    elif playerInput == 'X' or playerInput == 'x':
-        print("Bye Bye!")
+            elif placement[0] == rooms[2]:
+                roomID = 1
+        else:
+            print("Geht nicht")
+    elif userInput == "X" or userInput == "x":
         break
     else:
-        print("Falsche Eingabe. Probiere nochmal!")
+        print(wrongInputText)
 
-
-
-
-
-
-
-
+print(closureText)
 
 
 
