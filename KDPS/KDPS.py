@@ -1,57 +1,47 @@
-#lab04.py
+﻿#lab05.py
 
-def cyclestep():
-    roomText = "Sie befinden sich im Raum"
-    directionText = "Ihr Blick ist gerichtet nach"
-    actionText = "Ihr Befehl (L-Links, R-Rechts, G-Gehen, X-Ende): "
-    print(roomText, roomID)
-    print(directionText, str(directions[directionID]))
-    return input(actionText)
+def getNewDirection(direction, turn, numdirections):
+    return (direction + turn) % numdirections
 
-welcomeText = """---------------------------------
-------------LABYRINTH------------
----------------------------------"""
-closureText = """---------------------------------
--------------Bye Bye-------------
----------------------------------
-"""
-wrongInputText = "Falsche Eingabe. Versuche nochmal."
+def getNewRoom(room, direction, connections):
+    if (room, direction) in connections:
+        return connections[(room, direction)]
+    else:
+        return None
 
-roomID = 'Kuche'
-directionID = 0
-directions = ["Norden", "Osten", "Suden", "Westen"]
+print("-" * 33)
+print("-" * 12 + "LABYRINTH" + "-" * 12)
+print("-" * 33)
+
+directions  = ["Norden", "Osten", "Süden", "Westen"]
 connections = {
-    ('Kuche', 0) : 'Wohnzimmer',
-    ('Wohnzimmer', 2) : 'Kuche',
-    ('Wohnzimmer', 3) : 'Bad',
-    ('Bad', 1) : 'Wohnzimmer' }
+    ("Küche"     , 0): "Wohnzimmer",
+    ("Wohnzimmer", 2): "Küche",
+    ("Wohnzimmer", 1): "Bad",
+    ("Bad"       , 3): "Wohnzimmer"
+}
 
-print(welcomeText)
+room      = "Küche"
+direction = 0
+
+print(f"Sie befinden sich im Raum '{room}'.")
+print(f"Ihr Blick ist nach '{directions[direction]}' gerichtet.")
 
 while True:
-    userInput = cyclestep()
-    if userInput == "L" or userInput == "l":
-        if directionID == 0:
-            directionID = len(directions) - 1
+    z = input("Ihr Befehl (L-Links, R-Rechts, G-Gehen, X-Ende): ").upper()
+    if z == "L":
+        direction = getNewDirection(direction, -1, len(directions))
+        print(f"Neue Blickrichtung: {directions[direction]}")
+    elif z == "R":
+        direction = getNewDirection(direction, +1, len(directions))
+        print(f"Neue Blickrichtung: {directions[direction]}")
+    elif z == "G":
+        newRoom = getNewRoom(room, direction, connections)
+        if newRoom is not None:
+            room = newRoom
+            print(f"Neuer Raum: {room}")
         else:
-            directionID -= 1
-    elif userInput == "R" or userInput == "r":
-        if directionID == len(directions) - 1:
-            directionID = 0
-        else:
-            directionID += 1
-    elif userInput == "G" or userInput == "g":
-        placement = (roomID, directionID)
-        if placement in connections:
-            roomID = connections[placement]            
-        else:
-            print("Geht nicht")
-    elif userInput == "X" or userInput == "x":
+            print("Geht nicht.")
+    elif z == "X":
         break
-    else:
-        print(wrongInputText)
-
-print(closureText)
-
-
-
+print("Bye.")
